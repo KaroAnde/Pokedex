@@ -23,7 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PokemonList">
+        <activity android:name=".PokemonList" android:windowSoftInputMode="adjustResize">
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
@@ -31,6 +31,7 @@
                 <action android:name="android.intent.action.SEARCH"></action>
             </intent-filter>
         </activity>
+        <activity android:name=".SinglePokemonAct"></activity>
     </application>
 
 </manifest>

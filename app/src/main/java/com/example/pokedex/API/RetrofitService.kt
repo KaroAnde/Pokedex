@@ -1,6 +1,7 @@
 package com.example.pokedex.API
 
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface RetrofitService {
@@ -9,5 +10,8 @@ interface RetrofitService {
         //@Query("offset") offset : Int,
         //@Query("limit") limit : Int
     ) : AllPokemonResponse
+
+    @GET("pokemon/{name}")
+    suspend fun getSinglePokemon(@Path("name") name : String) : SinglePokemon
 
 }

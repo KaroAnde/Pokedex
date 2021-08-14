@@ -1,24 +1,38 @@
 package com.example.pokedex.API
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class PokemonViewModel : ViewModel() {
+//(private val name:String
+class PokemonViewModel(private val name: String) : ViewModel() {
 
     val retrofitService = API.retrofitService
 
     private val _allPokemons = MutableLiveData<AllPokemonResponse>()
     val allPokemons : LiveData<AllPokemonResponse> get() = _allPokemons
 
+    private val _singlePokemon = MutableLiveData<SinglePokemon>()
+    val singlePokemon : LiveData<SinglePokemon> get () = _singlePokemon
+
     init {
         viewModelScope.launch(Dispatchers.IO){
             val everyPokemon = retrofitService.getAllPokemon()
             _allPokemons.postValue(everyPokemon)
         }
+
+        viewModelScope.launch(Dispatchers.IO) {
+            val singlePokemon = retrofitService.getSinglePokemon(name)
+            _singlePokemon.postValue(singlePokemon)
+        }
     }
 
+   class Factory(private val name : String) : ViewModelProvider.Factory{
+
+        @Suppress("UNCHECKED_CAST")
+        override fun <T : ViewModel?> create (modelClass: Class<T>) : T {
+            return PokemonViewModel(name) as T
+        }
+    }
 }
+

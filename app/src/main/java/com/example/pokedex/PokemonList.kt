@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pokedex.API.AllPokemonResponse
 import com.example.pokedex.API.PokemonViewModel
+import com.example.pokedex.API.SinglePokemon
 import com.example.pokedex.databinding.ActivityMainBinding
 import com.example.pokedex.databinding.PokemonListBinding
 
@@ -20,6 +21,7 @@ class PokemonList : AppCompatActivity (){
     val viewModel : PokemonViewModel by viewModels()
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = PokemonListBinding.inflate(layoutInflater)
@@ -27,15 +29,13 @@ class PokemonList : AppCompatActivity (){
 
         var pokemonList = viewModel.allPokemons
 
-        /* pokemonList.observe(this) { allPokemons : AllPokemonResponse ->
-            binding.test.text = allPokemons.toString()
-        }*/
 
         pokemonList.observe(this) { listPokemons: AllPokemonResponse ->
             var adapter = RecyclerAdapter(listPokemons.results)
             binding.recyclerView.adapter = adapter
             binding.recyclerView.layoutManager = LinearLayoutManager(this)
             binding.recyclerView.setHasFixedSize(true)
+
 
 
             binding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
@@ -56,11 +56,8 @@ class PokemonList : AppCompatActivity (){
     }
 
 
-    private fun performSearch(){
 
-    }
-
-   /* override fun onCreateOptionsMenu(menu: Menu): Boolean {
+   /*override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.options_menu,menu)
 
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
@@ -68,14 +65,8 @@ class PokemonList : AppCompatActivity (){
             setSearchableInfo(searchManager.getSearchableInfo(componentName))
         }
         return true
-    }
-
-    private fun handleIntent(intent: Intent) {
-        if (Intent.ACTION_SEARCH == intent.action) {
-            val query = intent.getStringExtra(SearchManager.QUERY)
-
-        }
-
     }*/
+
+
 
 }
