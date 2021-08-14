@@ -6,5 +6,5 @@ import com.squareup.moshi.JsonClass
 data class AllPokemonResponse(
 
 
-    val results : List<PokemonData>
+    val results : MutableList<PokemonData>
 )
