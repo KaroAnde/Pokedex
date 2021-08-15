@@ -5,7 +5,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 //(private val name:String
-class PokemonViewModel(private val name: String) : ViewModel() {
+class PokemonViewModel(val name: String) : ViewModel() {
 
     val retrofitService = API.retrofitService
 

@@ -5,11 +5,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pokedex.API.AllPokemonResponse
+import com.example.pokedex.API.PokemonData
 import com.example.pokedex.API.PokemonViewModel
 import com.example.pokedex.API.SinglePokemon
 import com.example.pokedex.databinding.ActivityMainBinding
@@ -18,8 +20,9 @@ import com.example.pokedex.databinding.PokemonListBinding
 class PokemonList : AppCompatActivity (){
 
     private lateinit var binding : PokemonListBinding
-    val viewModel : PokemonViewModel by viewModels()
-
+    val viewModel : PokemonViewModel by viewModels() {
+        PokemonViewModel.Factory("pikachu")
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +34,7 @@ class PokemonList : AppCompatActivity (){
 
 
         pokemonList.observe(this) { listPokemons: AllPokemonResponse ->
-            var adapter = RecyclerAdapter(listPokemons.results)
+            var adapter = RecyclerAdapter(listPokemons.results) { position -> onListItemClick(position) }
             binding.recyclerView.adapter = adapter
             binding.recyclerView.layoutManager = LinearLayoutManager(this)
             binding.recyclerView.setHasFixedSize(true)
@@ -50,13 +53,18 @@ class PokemonList : AppCompatActivity (){
                 }
             })
         }
-
-
-
     }
 
 
 
+    private fun onListItemClick(position : String) {
+        Toast.makeText(this, position, Toast.LENGTH_SHORT).show()
+
+
+        val nextScreen = Intent(this@PokemonList, SinglePokemonAct::class.java)
+        nextScreen.putExtra("pokemonName", position)
+        startActivity(nextScreen)
+    }
    /*override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.options_menu,menu)
 

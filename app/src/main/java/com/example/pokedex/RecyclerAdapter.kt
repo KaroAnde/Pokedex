@@ -8,32 +8,34 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.pokedex.API.PokemonData
 import java.util.*
 import kotlin.collections.ArrayList
 
-class RecyclerAdapter (private var pokemonList : MutableList<PokemonData>) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
+class RecyclerAdapter (private var pokemonList : MutableList<PokemonData>, private val onItemClicked : (position : String) -> Unit) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
-    lateinit var url : String
-    var pokemonFilterList : MutableList<PokemonData>
+    lateinit var url: String
+    var pokemonFilterList: MutableList<PokemonData>
 
     init {
         pokemonFilterList = pokemonList
+
     }
 
-   fun getFilter() : Filter {
-        return object : Filter(){
+    fun getFilter(): Filter {
+        return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val charSearch = constraint.toString()
-                if(charSearch.isEmpty()) {
+                if (charSearch.isEmpty()) {
                     pokemonFilterList = pokemonList
                 } else {
                     val resultList = ArrayList<PokemonData>()
-                    for(row in pokemonList){
+                    for (row in pokemonList) {
 
-                        if(row.toString().toLowerCase(Locale.ROOT).contains(charSearch.toLowerCase(Locale.ROOT))) {
+                        if (row.toString().toLowerCase(Locale.ROOT).contains(charSearch.toLowerCase(Locale.ROOT))) {
                             resultList.add(row)
                         }
                     }
@@ -46,17 +48,16 @@ class RecyclerAdapter (private var pokemonList : MutableList<PokemonData>) : Rec
 
             @Suppress("UNCHECKED_CAST")
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-               pokemonFilterList = results?.values as MutableList<PokemonData>
+                pokemonFilterList = results?.values as MutableList<PokemonData>
                 notifyDataSetChanged()
             }
         }
     }
 
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerAdapter.ViewHolder {
 
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_layout,parent,false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_layout, parent, false)
         return ViewHolder(view)
     }
 
@@ -67,13 +68,13 @@ class RecyclerAdapter (private var pokemonList : MutableList<PokemonData>) : Rec
         val activity = holder.itemView.context as Activity
         val stringUrl = currentItem.url
         //Fiks hvis kræsj SYSTEM UI
-        url = if(stringUrl.length <= 36){
-            val substring = stringUrl.subSequence(25,36)
-            val digits = substring.filter{it.isDigit()}
+        url = if (stringUrl.length <= 36) {
+            val substring = stringUrl.subSequence(25, 36)
+            val digits = substring.filter { it.isDigit() }
             "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${digits}.png"
-        } else{
-            val substring = stringUrl.subSequence(25,37)
-            val digits = substring.filter{it.isDigit()}
+        } else {
+            val substring = stringUrl.subSequence(25, 37)
+            val digits = substring.filter { it.isDigit() }
             "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${digits}.png"
         }
 
@@ -87,11 +88,22 @@ class RecyclerAdapter (private var pokemonList : MutableList<PokemonData>) : Rec
         return pokemonFilterList.size
     }
 
-    inner class ViewHolder (itemView : View) : RecyclerView.ViewHolder(itemView){
-        val itemName : TextView = itemView.findViewById(R.id.name)
-        val itemSymbol : ImageView = itemView.findViewById(R.id.symbol)
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+        val itemName: TextView = itemView.findViewById(R.id.name)
+        val itemSymbol: ImageView = itemView.findViewById(R.id.symbol)
+
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+
+        override fun onClick(v: View?) {
+            val position = itemName.text.toString()
+            onItemClicked(position)
+        }
+
 
     }
-
-
 }
+
+
