@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/pokemonImage"
+        android:layout_height="300dp"
+        android:layout_width="match_parent"
+        android:layout_margin="20dp"
+        android:src="@drawable/pikachu_splash_image"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="Pokemon" />
+
+    <TextView
+        android:id="@+id/gameLostTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Oh no, you lost"
+        android:textSize="36sp"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@id/pokemonImage"
+        app:layout_constraintEnd_toEndOf="@id/pokemonImage"
+        app:layout_constraintStart_toStartOf="@id/pokemonImage"
+        app:layout_constraintTop_toTopOf="@id/pokemonImage" />
+
+    <TextView
+        android:id="@+id/gameWonTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="You won!"
+        android:textSize="36sp"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@id/pokemonImage"
+        app:layout_constraintEnd_toEndOf="@id/pokemonImage"
+        app:layout_constraintStart_toStartOf="@id/pokemonImage"
+        app:layout_constraintTop_toTopOf="@id/pokemonImage" />
+
+    <TextView
+        android:id="@+id/wordTextView"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:letterSpacing="0.3"
+        android:textSize="26sp"
+        tools:text="_ _ ABCD_ _ _ _ _ _"
+        app:layout_constraintTop_toBottomOf="@id/pokemonImage" />
+
+    <TextView
+        android:id="@+id/lettersUsedTextView"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:textSize="18sp"
+        tools:text="Used Letters: A, B, C , D, E , F, G"
+        app:layout_constraintTop_toBottomOf="@id/wordTextView" />
+
+    <Button
+        android:id="@+id/newGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start new game"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lettersUsedTextView" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/lettersLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/newGame">
+
+        <androidx.constraintlayout.helper.widget.Flow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp"
+            app:constraint_referenced_ids="a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z"
+            app:flow_wrapMode="aligned"/>
+
+
+        <TextView
+            android:id="@+id/a"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_green"
+            android:paddingHorizontal="10dp"
+            android:text="A"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/b"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_green"
+            android:paddingHorizontal="10dp"
+            android:text="B"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/c"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_green"
+            android:paddingHorizontal="10dp"
+            android:text="C"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/d"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_green"
+            android:paddingHorizontal="10dp"
+            android:text="D"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/e"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_green"
+            android:paddingHorizontal="10dp"
+            android:text="E"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/f"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_green"
+            android:paddingHorizontal="10dp"
+            android:text="F"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/g"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_green"
+            android:paddingHorizontal="10dp"
+            android:text="G"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/h"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_green"
+            android:paddingHorizontal="10dp"
+            android:text="H"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/i"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_green"
+            android:paddingHorizontal="10dp"
+            android:text="I"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/j"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_green"
+            android:paddingHorizontal="10dp"
+            android:text="J"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/k"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_green"
+            android:paddingHorizontal="10dp"
+            android:text="K"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/l"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_green"
+            android:paddingHorizontal="10dp"
+            android:text="L"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/m"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_green"
+            android:paddingHorizontal="10dp"
+            android:text="M"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/n"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_green"
+            android:paddingHorizontal="10dp"
+            android:text="N"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/o"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_green"
+            android:paddingHorizontal="10dp"
+            android:text="O"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/p"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_green"
+            android:paddingHorizontal="10dp"
+            android:text="P"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/q"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_green"
+            android:paddingHorizontal="10dp"
+            android:text="Q"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/r"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_green"
+            android:paddingHorizontal="10dp"
+            android:text="R"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/s"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_green"
+            android:paddingHorizontal="10dp"
+            android:text="S"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/t"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_green"
+            android:paddingHorizontal="10dp"
+            android:text="T"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/u"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_green"
+            android:paddingHorizontal="10dp"
+            android:text="U"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/v"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_green"
+            android:paddingHorizontal="10dp"
+            android:text="V"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/w"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_green"
+            android:paddingHorizontal="10dp"
+            android:text="W"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/x"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_green"
+            android:paddingHorizontal="10dp"
+            android:text="X"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/y"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_green"
+            android:paddingHorizontal="10dp"
+            android:text="Y"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/z"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_green"
+            android:paddingHorizontal="10dp"
+            android:text="Z"
+            android:textSize="24sp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

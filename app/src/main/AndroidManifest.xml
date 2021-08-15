@@ -32,6 +32,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".SinglePokemonAct"></activity>
+        <activity android:name=".GuessPokemon.StartScreen"></activity>
+        <activity android:name=".GuessPokemon.GuessPokemon"></activity>
     </application>
 
 </manifest>

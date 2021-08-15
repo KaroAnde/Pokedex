@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pokedex.API.PokemonViewModel
 import com.example.pokedex.API.SinglePokemon
+import com.example.pokedex.GuessPokemon.StartScreen
 import com.example.pokedex.databinding.PokemonListBinding
 import com.example.pokedex.databinding.SplashScreenBinding
 
@@ -33,7 +34,7 @@ class SplashScreen : AppCompatActivity () {
 
         Handler().postDelayed({
 
-            val intent = Intent(this, PokemonList::class.java)
+            val intent = Intent(this, StartScreen::class.java)
             startActivity(intent)
             finish()
         }, 2000)
