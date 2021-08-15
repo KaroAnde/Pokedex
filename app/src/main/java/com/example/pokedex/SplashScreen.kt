@@ -34,7 +34,7 @@ class SplashScreen : AppCompatActivity () {
 
         Handler().postDelayed({
 
-            val intent = Intent(this, StartScreen::class.java)
+            val intent = Intent(this, PokemonList::class.java)
             startActivity(intent)
             finish()
         }, 2000)

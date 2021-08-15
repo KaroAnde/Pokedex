@@ -1,5 +1,6 @@
 package com.example.pokedex.GuessPokemon
 
+import com.example.pokedex.API.PokemonData
 import kotlin.random.Random
 
 class GameManager {
@@ -10,7 +11,6 @@ class GameManager {
     private val maxNumberOfTries = 7
     private var currentTries = 0
     //private var drawable: Int = R.drawable.image
-
 
     //Resets values
     fun startNewGame() : GameState {

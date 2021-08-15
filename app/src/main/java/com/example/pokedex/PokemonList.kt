@@ -1,10 +1,7 @@
 package com.example.pokedex
 
-import android.app.SearchManager
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.activity.viewModels
@@ -13,8 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pokedex.API.AllPokemonResponse
 import com.example.pokedex.API.PokemonData
 import com.example.pokedex.API.PokemonViewModel
-import com.example.pokedex.API.SinglePokemon
-import com.example.pokedex.databinding.ActivityMainBinding
+import com.example.pokedex.DB.DbViewModel
+import com.example.pokedex.GuessPokemon.GameManager
 import com.example.pokedex.databinding.PokemonListBinding
 
 class PokemonList : AppCompatActivity (){
@@ -23,6 +20,8 @@ class PokemonList : AppCompatActivity (){
     val viewModel : PokemonViewModel by viewModels() {
         PokemonViewModel.Factory("pikachu")
     }
+    val dbViewModel : DbViewModel by viewModels()
+    private lateinit var pokemonFilterList: MutableList<PokemonData>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,8 +29,10 @@ class PokemonList : AppCompatActivity (){
         binding = PokemonListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        var pokemonList = viewModel.allPokemons
 
+
+        var pokemonList = viewModel.allPokemons
+        dbViewModel.init(this)
 
         pokemonList.observe(this) { listPokemons: AllPokemonResponse ->
             var adapter = RecyclerAdapter(listPokemons.results) { position -> onListItemClick(position) }
@@ -39,7 +40,15 @@ class PokemonList : AppCompatActivity (){
             binding.recyclerView.layoutManager = LinearLayoutManager(this)
             binding.recyclerView.setHasFixedSize(true)
 
+            pokemonFilterList = listPokemons.results
 
+            //Log.d("test",test.toString())
+            var test = pokemonFilterList.map { it.name }
+
+
+            for (i in test.indices){
+                dbViewModel.save(test[i],"noURL")
+            }
 
             binding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
                 override fun onQueryTextSubmit(query: String?): Boolean {
@@ -53,12 +62,16 @@ class PokemonList : AppCompatActivity (){
                 }
             })
         }
+
+
+
     }
 
 
 
     private fun onListItemClick(position : String) {
         Toast.makeText(this, position, Toast.LENGTH_SHORT).show()
+
 
 
         val nextScreen = Intent(this@PokemonList, SinglePokemonAct::class.java)

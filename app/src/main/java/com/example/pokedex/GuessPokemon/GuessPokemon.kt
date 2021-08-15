@@ -1,21 +1,39 @@
 package com.example.pokedex.GuessPokemon
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.children
+import com.example.pokedex.API.PokemonData
+import com.example.pokedex.DB.DbViewModel
+import com.example.pokedex.DB.PokemonListModel
 import com.example.pokedex.databinding.GuessPokemonBinding
+
+
 
 class GuessPokemon : AppCompatActivity() {
 
     private val gameManager = GameManager()
     private lateinit var binding : GuessPokemonBinding
+    val dbViewModel : PokemonListModel by viewModels()
+    lateinit var pokemonFilterList: MutableList<PokemonData>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = GuessPokemonBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        dbViewModel.init(this)
+        dbViewModel.pokemonListLiveData.observe(this) { DBList ->
+            pokemonFilterList = DBList as MutableList<PokemonData>
+            var test = pokemonFilterList.map { it.name }
+            Log.d("Fetch", test[100])
+            GameConstants.words = test
+        }
+
 
         binding.newGame.setOnClickListener {
             startNewGame()
