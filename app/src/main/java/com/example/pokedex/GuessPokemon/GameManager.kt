@@ -26,9 +26,9 @@ class GameManager {
     fun generateUnderscores (word : String) {
         val stringBuilder = StringBuilder()
         word.forEach { char ->
-            //Kan fjerne denne fordi jeg bare har ting med 1 ord tror jeg
-            if(char == '/'){
-                stringBuilder.append('/')
+
+            if(char == '-'){
+                stringBuilder.append('-')
             } else {
                 stringBuilder.append("_")
             }

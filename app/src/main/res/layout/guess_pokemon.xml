@@ -10,7 +10,7 @@
         android:layout_height="300dp"
         android:layout_width="match_parent"
         android:layout_margin="20dp"
-        android:src="@drawable/pikachu_splash_image"
+        android:src="@drawable/logo"
         app:layout_constraintTop_toTopOf="parent"
         android:contentDescription="Pokemon" />
 
@@ -20,6 +20,7 @@
         android:layout_height="wrap_content"
         android:text="Oh no, you lost"
         android:textSize="36sp"
+        android:textColor="#FF0000"
         android:visibility="gone"
         tools:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@id/pokemonImage"

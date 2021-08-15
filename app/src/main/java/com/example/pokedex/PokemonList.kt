@@ -43,11 +43,11 @@ class PokemonList : AppCompatActivity (){
             pokemonFilterList = listPokemons.results
 
             //Log.d("test",test.toString())
-            var test = pokemonFilterList.map { it.name }
+            var name = pokemonFilterList.map { it.name }
 
 
-            for (i in test.indices){
-                dbViewModel.save(test[i],"noURL")
+            for (i in name.indices){
+                dbViewModel.save(name[i],"noURL")
             }
 
             binding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
